@@ -51,6 +51,11 @@ setup(
     },
     include_package_data=True,
     install_requires=reqs,
+    entry_points={
+        'console_scripts': [
+            'relent = relent:main',
+        ],
+    },
     classifiers=[
         ('License :: OSI Approved :: GNU Affero General Public '
          'License v3 or later (AGPLv3+)'),

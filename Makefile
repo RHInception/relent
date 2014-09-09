@@ -34,11 +34,6 @@ RPMSPEC := $(RPMSPECDIR)/$(NAME).spec
 # To force a rebuild of the docs run 'touch VERSION && make docs'
 docs: $(MANPAGES)
 
-# Regenerate %.1.asciidoc if %.1.asciidoc.in has been modified more
-# recently than %.1.asciidoc.
-%.1.asciidoc: %.1.asciidoc.in VERSION
-	sed "s/%VERSION%/$(VERSION)/" $< > $@
-
 sdist: clean
 	python setup.py sdist
 	rm -fR $(SHORTNAME).egg-info

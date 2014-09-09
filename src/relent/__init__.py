@@ -16,8 +16,6 @@
 import argparse
 import json
 
-import jsonschema
-
 from pkg_resources import resource_filename
 
 
@@ -28,6 +26,7 @@ def main():
     """
     Main entry point.
     """
+    import jsonschema
     parser = argparse.ArgumentParser(version=__version__)
     parser.add_argument(
         'playbooks', metavar='PLAYBOOKS', type=str, nargs='+',
