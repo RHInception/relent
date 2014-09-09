@@ -29,12 +29,18 @@ def main():
     import jsonschema
     parser = argparse.ArgumentParser(version=__version__)
     parser.add_argument(
+        '--verbose', action='store_true', default=False,
+        help='Turn on verbose output.')
+    parser.add_argument(
+        '--header', action='store_true', default=False,
+        help='Turn on header.')
+    parser.add_argument(
         'playbooks', metavar='PLAYBOOKS', type=str, nargs='+',
         help='The playbook(s) to lint.')
 
     args = parser.parse_args()
 
-    schema_validation_results = {}
+    validation_results = {}
     all_valid = True
     # Load the playbook schema
     with open(resource_filename(
@@ -48,22 +54,30 @@ def main():
                     jsonschema.validate(json.load(pb), schema)
             except jsonschema.ValidationError, e:
                 all_valid = False
-                schema_validation_results[playbook] = (
-                    False, e.message, list(e.schema_path))
+                validation_results[playbook] = (
+                    False, e.message, list(e.schema_path), str(e))
             except ValueError, e:
                 all_valid = False
-                schema_validation_results[playbook] = (
-                    False, 'JSON is invalid.', str(e))
+                validation_results[playbook] = (
+                    False, 'JSON is invalid.', str(e), str(e))
 
     # If all_valid is True then return back happy results
     if all_valid is True:
+        if args.verbose or args.header:
+            parser._print_message('Found 0 issues.\n')
         raise SystemExit(0)
     else:
-        for problem_playbook in schema_validation_results.keys():
+        if args.verbose or args.header:
+            parser._print_message('Found %s issues.\n\n' % len(
+                validation_results))
+        for problem_playbook in validation_results.keys():
             parser._print_message('%s: E: %s %s\n' % (
                 problem_playbook,
-                schema_validation_results[problem_playbook][1],
-                schema_validation_results[problem_playbook][2]))
+                validation_results[problem_playbook][1],
+                validation_results[problem_playbook][2]))
+            if args.verbose:
+                parser._print_message(
+                    validation_results[problem_playbook][3] + '\n--\n')
         raise SystemExit(1)
 
 
