@@ -18,13 +18,14 @@ Build script.
 """
 
 import os.path
+import sys
 
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    import warnings
-    warnings.warn('No setuptools. Script creation will be skipped.')
-    from distutils.core import setup
+sys.path.insert(0, 'src')
+
+from relent import __version__
+
+# We MUST have setuptools
+from setuptools import setup, find_packages
 
 
 def parse_requirements(path):
@@ -36,15 +37,19 @@ reqs = parse_requirements('requirements.txt')
 
 setup(
     name='relent',
-    version='0.0.1',
+    version=__version__,
     author='See AUTHORS',
     url='https://github.com/RHInception/relent',
     license='AGPLv3',
     zip_safe=False,
-    package_dir={
-        'relent': os.path.join('src', 'relent')
-    },
     packages=find_packages('src'),
+    package_dir={
+        'relent': 'src/relent',
+    },
+    package_data={
+        'relent': ['*.json'],
+    },
+    include_package_data=True,
     install_requires=reqs,
     classifiers=[
         ('License :: OSI Approved :: GNU Affero General Public '
