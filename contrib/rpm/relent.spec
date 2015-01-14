@@ -9,7 +9,7 @@
 Name: relent
 Summary: Linter for Release Engine Playbooks
 Version: 0.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Applications/System
 License: AGPLv3
@@ -45,5 +45,8 @@ Linter for Release Engine playbooks.
 
 
 %changelog
+* Wed Jan 14 2015 Tim Bielawa <tbielawa@redhat.com> - 0.0.1-2
+- Update schema to reject subcommands that don't begin with a Capital letter
+
 * Tue Sep  9 2014 Steve Milner <stevem@gnulinux.net> - 0.0.1-1
 - Initial package.

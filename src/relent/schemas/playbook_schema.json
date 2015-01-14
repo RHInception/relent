@@ -35,12 +35,12 @@
         },
         "step_string": {
             "type": "string",
-            "pattern": "^[\\w]+:{1}[\\w]+$"
+            "pattern": "^[\\w]+:{1}[A-Z][\\w]+$"
         },
         "step_object": {
             "type": "object",
             "patternProperties": {
-                "^[\\w]+:{1}[\\w]+$": {
+                "^[\\w]+:{1}[A-Z][\\w]+$": {
                     "type": "object",
                     "properties": {
                         "notify": {"$ref": "#/definitions/notify"}
