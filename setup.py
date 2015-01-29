@@ -39,6 +39,7 @@ setup(
     name='relent',
     version=__version__,
     author='See AUTHORS',
+    description='Linter for RE playbooks',
     url='https://github.com/RHInception/relent',
     license='AGPLv3',
     zip_safe=False,
