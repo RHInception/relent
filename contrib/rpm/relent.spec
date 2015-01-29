@@ -5,15 +5,16 @@
 %endif
 
 %global _pkg_name relent
+%global _short_release 2
 
 Name: relent
 Summary: Linter for Release Engine Playbooks
 Version: 0.0.1
-Release: 2%{?dist}
+Release: %{_short_release}%{?dist}
 
 Group: Applications/System
 License: AGPLv3
-Source0: %{_pkg_name}-%{version}.tar.gz
+Source0: %{_pkg_name}-%{version}-%{_short_release}.tar.gz
 Url: https://github.com/rhinception/relent
 
 BuildArch: noarch
@@ -30,7 +31,7 @@ Linter for Release Engine playbooks.
 
 
 %prep
-%setup -q -n %{_pkg_name}-%{version}
+%setup -q -n %{_pkg_name}-%{version}-%{_short_release}
 
 %build
 %{__python2} setup.py build

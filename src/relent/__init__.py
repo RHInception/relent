@@ -19,7 +19,7 @@ import json
 from pkg_resources import resource_filename
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.1-2'
 
 
 def main():
